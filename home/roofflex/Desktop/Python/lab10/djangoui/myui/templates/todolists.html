@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'js/todolists.js' %}"></script>
+{% endblock %}
+
+{% block title %}Ваши списки задач:{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Ваши списки задач:</h1>
+    <!-- BUTTON TO TRIGGER THE ACTION -->
+  <p>
+    <button type="button" class="btn btn-primary js-create-book" data-url="{% url 'todolist_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      Создать список
+    </button>
+  </p>
+
+  {% if p %}
+        <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Название</th>
+        <th>Владелец</th>
+        <th>Задачи</th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for tasklist in p %}
+        {% include 'partial_list_list.html' %}
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% else %}
+    <table class="table" id="book-table">
+    <tr>
+          <td colspan="11" class="text-center bg-warning">Нет доступных списков задач</td>
+        </tr>
+    </table>
+{% endif %}
+
+  <!-- THE MODAL WE WILL BE USING -->
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

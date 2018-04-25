@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load util %}
+{% block title %}Задача {{ tasklist.name }}{% endblock %}
+{% block content %}
+    <h1 class="page-header">Задача {{ tasklist.name }}</h1>
+{% if tasklist %}
+        <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Владелец</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Состояние</th>
+        <th>Дата создания</th>
+        <th>Дата изменения</th>
+        <th>Дедлайн</th>
+        <th>Теги</th>
+        <th>Доступно</th>
+        <th>Приоритет</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>{{ tasklist.id }}</td>
+          <td>{{ tasklist.owner }}</td>
+          <td>{{ tasklist.name }}</td>
+          <td>{{ tasklist.description }}</td>
+          <td>{% if tasklist.completed %}Завершено{% else %}Не завершено{% endif %}</td>
+          <td>{{ tasklist.date_created }}</td>
+          <td>{{ tasklist.date_modified }}</td>
+          <td>{% if tasklist.due_date %}{{ tasklist.due_date }}{% endif %}</td>
+          <td>{% for i in tasklist.tags%}
+                <li>
+                {{ i }}
+                </li>
+            {% endfor %}</td>
+          <td>{% for i in tasklist.available_to%}
+                <li>
+                {{ i }}
+                </li>
+            {% endfor %}</td>
+          <td>{{ tasklist.priority }}</td>
+        </tr>
+    </tbody>
+  </table>
+    {% else %}
+    <table class="table" id="book-table">
+    <tr>
+          <td colspan="11" class="text-center bg-warning">Задача не доступна.</td>
+        </tr>
+    </table>
+    {% endif %}
+{% endblock %}
+

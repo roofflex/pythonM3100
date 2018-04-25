@@ -1,0 +1,37 @@
+{% load static %}<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Заметки{% endblock %}</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    <div>
+      {{ user }}
+      {% if user.is_anonymous %}
+      <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>
+      {% else %}
+      <a href="{% url 'logout' %}">logout</a>
+      {% endif %}
+    </div>
+    <header>
+      ...
+    </header>
+    <main>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    </main>
+    <footer>
+      ...
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>  <!-- JQUERY HERE -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
+  </body>
+</html>

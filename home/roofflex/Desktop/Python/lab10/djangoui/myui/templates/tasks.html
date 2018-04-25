@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% load util %}
+{% block javascript %}
+  <script src="{% static 'js/todolists.js' %}"></script>
+{% endblock %}
+{% block title %}Ваши задачи:{% endblock %}
+{% block content %}
+    <h1 class="page-header">Ваши задачи:</h1>
+    <!-- BUTTON TO TRIGGER THE ACTION -->
+  <p>
+    <button type="button" class="btn btn-primary js-create-task" data-url="{% url 'task_create' list_id %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      Создать задачу
+    </button>
+  </p>
+    <table class="table" id="task-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Владелец</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Состояние</th>
+        <th>Дата создания</th>
+        <th>Дата изменения</th>
+        <th>Дедлайн</th>
+        <th>Теги</th>
+        <th>Доступно</th>
+        <th>Приоритет</th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tasks in p %}
+        {% include 'partial_tasks_list.html' %}
+          {% empty %}
+        <tr>
+          <td colspan="11" class="text-center bg-warning">Нет доступных задач</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<!-- THE MODAL WE WILL BE USING -->
+  <div class="modal fade" id="modal-task">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+{% endblock %}

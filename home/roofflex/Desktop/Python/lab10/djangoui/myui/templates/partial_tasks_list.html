@@ -1,0 +1,33 @@
+<tr>
+          <td>{{ tasks.id }}</td>
+          <td>{{ tasks.owner }}</td>
+          <td><a href={% url "task-detail" list_id tasks.id %}>{{ tasks.name }}</a></td>
+          <td>{{ tasks.description }}</td>
+          <td>{% if tasks.completed %}Завершено{% else %}Не завершено{% endif %}</td>
+          <td>{{ tasks.date_created }}</td>
+          <td>{{ tasks.date_modified }}</td>
+          <td>{% if tasks.due_date %}{{ tasks.due_date }}{% endif %}</td>
+          <td>{% for i in tasks.tags%}
+                <li>
+                {{ i }}
+                </li>
+            {% endfor %}</td>
+          <td>{% for i in tasks.available_to%}
+                <li>
+                {{ i }}
+                </li>
+            {% endfor %}</td>
+          <td>{{ tasks.priority }}</td>
+        <td>
+          <button type="button"
+                  class="btn btn-warning btn-sm js-update-task"
+                  data-url="{% url 'task_update' list_id tasks.id %}">
+            <span class="glyphicon glyphicon-pencil"></span> Изменить
+          </button>
+            <button type="button"
+              class="btn btn-danger btn-sm js-delete-task"
+              data-url="{% url 'task_delete' list_id tasks.id %}">
+        <span class="glyphicon glyphicon-trash"></span> Удалить
+      </button>
+        </td>
+        </tr>

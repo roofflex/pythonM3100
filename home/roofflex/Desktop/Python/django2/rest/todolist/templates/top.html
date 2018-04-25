@@ -1,0 +1,31 @@
+﻿{% load staticfiles %}
+<html>
+	<head>
+		
+		<title>Здравствуйте</title>
+		
+	</head>
+	<body>
+		<header>
+			
+            <div class="log">
+                {% if request.user.is_authenticated %}
+
+                    
+                    <p><a href="/logout/">Выйти</a></p>
+                {%else %}
+                    <p><a href="/login/">Войти</a></p>  <p>&nbsp или &nbsp </p>
+                    <p><a href="/register/">Зарегистрироваться</a></p>
+
+                {%endif %}
+
+            </div>
+		</header>
+		<hr>
+	{% block content %}
+    {% endblock content %}
+
+		
+
+	</body>
+</html>

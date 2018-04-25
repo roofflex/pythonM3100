@@ -1,0 +1,23 @@
+<tr>
+          <td>{{ tasklist.id }}</td>
+          <td><a href="/todolists/{{ tasklist.id }}/tasks/">{{ tasklist.name }}</a></td>
+          <td>{{ tasklist.owner }}</td>
+          <td>{% for i in tasklist.tasks%}
+                <li>
+                {{ i }}
+                </li>
+            {% endfor %}</td>
+        <td>
+            {% if tasklist %}
+          <button type="button"
+                  class="btn btn-warning btn-sm js-update-book"
+                  data-url="{% url 'todolist_update' tasklist.id %}">
+            <span class="glyphicon glyphicon-pencil"></span> Изменить
+          </button>
+            <button type="button"
+              class="btn btn-danger btn-sm js-delete-book"
+              data-url="{% url 'todolist_delete' tasklist.id %}">
+        <span class="glyphicon glyphicon-trash"></span> Удалить
+      </button>
+            {% endif %}
+        </td></tr>
